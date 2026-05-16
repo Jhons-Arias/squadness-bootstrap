@@ -394,4 +394,41 @@ body { margin: 0; font-family: var(--sq-font-body); color: var(--sq-text-default
   .docs-main { margin-left: 0; padding: 24px 16px 64px; }
   .docs-topbar-search { display: none; }
   .docs-title { font-size: 22px; }
+
+  /* ── Tablas scrollables horizontalmente en mobile ── */
+  .docs-table,
+  .sq-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    /* Hint visual: sombra sutil en el borde derecho cuando hay overflow */
+    background:
+      linear-gradient(to right, var(--sq-surface-default) 30%, rgba(255,255,255,0)),
+      linear-gradient(to right, rgba(0,0,0,0), var(--sq-surface-default) 70%) 100% 0,
+      radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.08), rgba(0,0,0,0)),
+      radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.08), rgba(0,0,0,0)) 100% 0;
+    background-repeat: no-repeat;
+    background-size: 32px 100%, 32px 100%, 14px 100%, 14px 100%;
+    background-attachment: local, local, scroll, scroll;
+  }
+  /* Asegurar padding cómodo en celdas y que las tablas no fuercen el viewport */
+  .docs-table thead th,
+  .docs-table tbody td { padding: 10px 14px; }
+  .sq-table th, .sq-table td { padding: 10px 14px; }
+
+  /* Bloques de código también scrollables (los pre largos) */
+  .docs-code-wrapper pre,
+  .docs-preview-box pre { overflow-x: auto; }
+
+  /* Imágenes y previews nunca exceden el viewport */
+  .docs-article img,
+  .docs-preview-content img,
+  .docs-preview-box img { max-width: 100%; height: auto; }
+
+  /* Grids de 2 columnas (usados en index/principios) colapsan a 1 */
+  .docs-article [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
 }
